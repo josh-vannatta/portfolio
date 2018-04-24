@@ -1,0 +1,80 @@
+a {
+  display: inline-block;
+  div.with-after {
+    width: auto;
+    background: rgba(0,0,0,0.3);
+    border-radius: 0.2rem !important;
+    img {
+      height: 20px;
+      margin-right: 8px;
+      width: auto;
+    }
+    h5 {
+      white-space: nowrap;
+    }
+    &:after {
+      border-radius: 0 0 .2rem .2rem;
+      top: unset;
+      bottom: 0;
+      height: 0;
+      background: rgba(0,0,0,0.3);
+    }
+    &:before {
+      transition: .2s ease;
+      top: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-color: transparent;
+      border-top-color: rgba(0, 0, 0, 0.5);
+      border-width:0px;
+      margin-left: 0px;
+    }
+  }
+  &:hover {
+    div.with-after {
+      &:after {
+        height: 25%;
+      }
+    }
+  }
+}
+
+a.active div.with-after {
+  &:after {
+    height: 25%;
+  }
+  &:before {
+    border-width: 8px;
+    margin-left: -8px;
+  }
+}
+
+figure {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 0.2rem !important;
+  left: 0;
+  div {
+    border-radius: inherit !important;
+    position: relative;
+  }
+  p {
+    font-size: 14px;
+    letter-spacing: .05rem;
+  }
+}
+
+.edit-controls {
+  margin: 10px;
+}
+
+.edit-button {
+  background: rgba(255,255,255,.2);
+  padding: 0;
+  border-radius: 3px;
+}

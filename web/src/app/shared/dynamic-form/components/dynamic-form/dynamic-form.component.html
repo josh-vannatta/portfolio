@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+  <div class="row">
+    <ng-container *ngFor="let field of template"
+      dynamicField [template]="field"
+      [group]="form"
+      (fileUploaded)="uploadFile($event)"
+      (reset)="reset($event)"
+      (delete)="delete($event)">
+    </ng-container>
+  </div>
+</form>

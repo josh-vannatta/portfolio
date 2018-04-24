@@ -1,0 +1,22 @@
+<section class="container py-5 services-content" id="services-content">
+  <div class="service-header row justify-content-center">
+    <div class="col-lg-8">
+      <h3 class="text-center normal">What can I do for your online business?</h3>
+      <h5 class="text-center regular grey-text">Here's a list of my services</h5>
+    </div>
+  </div>
+   <div class="service-items row pt-5 justify-content-center">
+      <service-item
+      *ngFor="let serviceOffered of servicesList"
+      [service] = "serviceOffered"
+      class="col-lg-4 col-sm-6 px-4">
+      </service-item>
+   </div>
+   <div class="row justify-content-center">
+     <button type="button"
+     *ngIf="adminService.editMode"
+     class="btn btn-blue-grey edit-button mr-2"
+     mdbRippleRadius (click)="showPopup()">Create new service</button>
+     <button type="button" class="btn btn-primary gradient-focus" mdbRippleRadius routerLink="/portfolio">See my projects</button>
+   </div>
+</section>

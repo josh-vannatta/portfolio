@@ -1,0 +1,17 @@
+section {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+figure {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  i {
+    font-size: 1rem;
+  }
+}

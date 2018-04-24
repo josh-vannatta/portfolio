@@ -1,0 +1,13 @@
+<div class="md-form" [formGroup]="group">
+  <i class="grey-text fa fa-{{ template.icon }} prefix" *ngIf="template.icon"></i>
+  <select name="{{ template.name }}" formControlName="{{ template.name }}" mdbActive>
+      <option value="" selected></option>
+      <option *ngFor="let option of template.options" value="{{ option.value }}">{{ option.viewValue }}</option>
+  </select>
+  <label for="{{ template.name }}" [ngClass]="{invalid: onInputValid(template.name)}"> {{ template.label }}</label>
+  <div *ngIf="onInputValid(template.name)" class="error-msg-container" style="height: 1px">
+    <small class="text-danger error-msg mt-0" *ngFor="let error of group.controls[template.name].errors | formError">
+    {{ template.label + error }}
+    </small>
+  </div>
+</div>

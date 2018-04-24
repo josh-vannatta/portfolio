@@ -1,0 +1,59 @@
+:host {
+  display: block;
+  position: relative;
+}
+
+.skills-list {
+  position: relative;
+  z-index: 2;
+}
+
+.suitcase {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: .5;
+  z-index: 1;
+  .trunk {
+    border-radius: 12px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 1;
+  }
+  .handle {
+    width: 180px;
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    z-index: 0;
+    filter: drop-shadow(0px 4px 5px rgba(0,0,0,0.2));
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  :host {
+    padding-left:  6rem !important;
+    padding-right: 6rem !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :host {
+    padding-left:  1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  :host {
+    padding-left:  1rem !important;
+    padding-right: 1rem !important;
+  }
+}

@@ -1,0 +1,26 @@
+<div class="d-flex flex-row">
+  <div class="md-form mr-3 w-100 mb-2">
+    <i class="grey-text fa fa-{{ template.icon }} prefix" *ngIf="template.icon"></i>
+    <select name="{{ template.name }}" mdbActive #selector>
+      <option value="" selected>{{ template.label }}</option>
+      <ng-container *ngFor="let item of itemsList; let i = index">
+        <option
+        *ngIf="!item.chosen"
+        value="{{ i }}">
+          {{ item.name | titlecase }}
+        </option>
+      </ng-container>
+    </select>
+  </div>
+  <button type="button" class="btn btn-blue-grey mb-4 p-2" (click)="addItem(selector)">Add new</button>
+</div>
+
+<div class="d-flex flex-wrap flex-row mb-2">
+  <div *ngFor="let control of getItems(group); let i = index">
+    <figure class="chip">{{control.value.name | titlecase}}
+      <a href="javascript:;" class="text-white dense" (click)='removeItem(control.value.id, i)'>
+        <i class="close fa fa-times ml-1" style="font-size: 14px"></i>
+      </a>
+    </figure>
+  </div>
+</div>

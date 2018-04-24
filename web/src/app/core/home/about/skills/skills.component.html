@@ -1,0 +1,18 @@
+<section class="skills-list py-3">
+  <div class="d-flex align-content-start flex-wrap my-3">
+    <skill-item class="mr-2 mb-3"
+      *ngFor="let skill of skillList; let i = index"
+      [skill]="skill" [index]="i"
+      [skillSelected]="selected"
+      (onSelect)="skillSelected($event)"></skill-item>
+    <div *ngIf="adminService.editMode" class="edit-container">
+      <button type="button"  style="height: 40px"
+      class="btn btn-blue-grey edit-button m-0 py-0"
+      mdbRippleRadius (click)="showPopup()">Create new skill</button>
+    </div>
+  </div>
+</section>
+<section class="suitcase">
+  <figure class="trunk z-depth-1 background-themelight"></figure>
+  <img class="handle" src="/assets/images/vector/skills_handle.svg" alt="/assets/images/png/skills_handle.png">
+</section>

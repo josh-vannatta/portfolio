@@ -1,0 +1,35 @@
+.node-image {
+  width: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(0,0,0,0.1);
+  min-height: 250px;
+  .image {
+    position: relative;
+    overflow: hidden;
+    img {
+      width: 100%;
+      position: relative;
+    }
+  }
+  .toggle-code {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #394e5a;
+    padding: 8px 8px 8px 35px;
+    border-radius: 0 0 0 30px;
+    color: #0cbbcc !important;
+  }
+}
+
+.under-the-hood {
+  background: linear-gradient(to right, #304652, #19242b) !important;
+  box-shadow: inset 0px 3px 5px rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  transition: .5s ease;
+}

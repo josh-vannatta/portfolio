@@ -1,0 +1,41 @@
+<mdb-navbar SideClass="navbar fixed-top navbar-expand-md navbar-dark unique-color gradient-background" #navbar style="position: absolute; z-index: 200" id="navbar">
+    <logo><a class="navbar-brand d-flex flex-row align-items-center"
+      pageScroll
+      [pageScrollDuration]="800"
+      href="#core"
+      routerLink="/">
+      <div>
+        <img src="./assets/images/vector/vn_brand_white.svg" alt="./assets/images/png/vn_brand_white.png">
+      </div>
+      <h5>JOSHUA</h5>
+      <h5>VAN+NATTA</h5>
+    </a></logo>
+    <links>
+        <div class="navbar-nav mr-auto"></div>
+        <form class="" action="index.html" method="post">
+          <ul class="navbar-nav mr-auto">
+            <!-- Signups
+              <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle class="nav-link regular dropdown-toggle waves-effect waves-light" mdbRippleRadius>Account</a>
+                <div class="dropdown-menu dropdown-menu-right" *dropdownMenu role="menu">
+                    <a class="dropdown-item waves-effect waves-light" href="javascript:;" routerLink="/signup">Register</a>
+                    <a class="dropdown-item waves-effect waves-light" href="javascript:;" routerLink="/signin">Sign In</a>
+                </div>
+              </li>
+            -->
+            <li [ngClass]="{'nav-item': true, 'clicked': linkStatus.home, 'reset': linkStatus.home == null }"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="selectLink('home')">
+              <a dropdownToggle class="nav-link regular" href="javascript:;" routerLink="/">Home</a>
+            </li>
+            <li [ngClass]="{'nav-item': true, 'clicked': linkStatus.portfolio, 'reset': linkStatus.portfolio == null }" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"  (click)="selectLink('portfolio')">
+              <a dropdownToggle class="nav-link regular"  href="javascript:;" routerLink="/portfolio">Portfolio</a>
+            </li>
+            <!-- <li [ngClass]="{'nav-item': true, 'clicked': linkStatus.workshop, 'reset': linkStatus.workshop == null  }" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"  (click)="selectLink('workshop')">
+              <a dropdownToggle class="nav-link regular" href="javascript:;" routerLink="/workshop">Workshop</a>
+            </li> -->
+            <li [ngClass]="{'nav-item': true, 'clicked': linkStatus.contact, 'reset': linkStatus.contact == null  }" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"  (click)="selectLink('contact')">
+              <a dropdownToggle class="nav-link regular" href="javascript:;" routerLink="/contact">Contact</a>
+            </li>
+          </ul>
+        </form>
+    </links>
+</mdb-navbar>

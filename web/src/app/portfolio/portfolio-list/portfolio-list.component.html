@@ -1,0 +1,26 @@
+<div class="faux-navbar"></div>
+<section class="portfolio-intro container">
+    <h3 class="text-center text-grey-3 mb-3 text-center">Here's what I've been up to this year</h3>
+    <h5 class="text-center text-grey-3">Check out my recent projects</h5>
+</section>
+<section class="portolio-list pb-5">
+  <portfolio-item
+    *ngFor="let project of projectList; let i = index"
+    [project]="project"
+    [skillList]="skillList"
+    [serviceList]="serviceList"
+    [ngStyle]="{ 'z-index' : projectList.length - i }">
+    <div class="ribbons">
+      <div class="ribbon {{ i % 2 == 0 ? 'anti' : '' }}skew-3 z-depth-3 gradient-theme{{ i % 2 == 0 ? 'contrast' : '' }}"></div>
+    </div>
+  </portfolio-item>
+  <div class="container py-5  d-flex justify-content-center">
+    <button
+      *ngIf="adminService.editMode"
+      (click)="newProjectPopup()"
+      type="button"
+      class="btn btn-blue-grey edit-button m-0">
+      Add new project
+    </button>
+  </div>
+</section>

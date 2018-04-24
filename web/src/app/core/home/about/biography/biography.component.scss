@@ -1,0 +1,66 @@
+:host {
+  display: block;
+  position: relative;
+}
+
+figure {
+  transition: 0s;
+  width: 100%;
+  max-height: 400px;
+  max-width: 400px;
+  padding-top: 100%;
+  position: relative;
+  background-image: url(/assets/images/jpg/about_headshot.jpg);
+  background-size: cover;
+  border: 3px solid white;
+  &:after {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -18%;
+    width: 120%;
+    height: 120%;
+    border: 1px solid white;
+    border-radius: 50%;
+    z-index: 0;
+  }
+}
+
+.md-cover {
+  transition: .1s;
+  width: 100%;
+  left: 0;
+  position: relative;
+}
+
+@media screen and (max-width: 992px) {
+  .md-cover {
+    width: 180%;
+    left: -80%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  figure {
+    width: 70%;
+    padding-top: 70%;
+  }
+  .md-cover {
+    width: 100%;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  figure {
+    width: 80%;
+    padding-top: 80%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  figure {
+    width: 100%;
+    padding-top: 100%;
+  }
+}

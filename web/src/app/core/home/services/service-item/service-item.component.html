@@ -1,0 +1,17 @@
+<figure class="p-5 white mb-5 z-depth-1 hoverable">
+  <div class="edit-controls" *ngIf="adminService.editMode" >
+    <a href="javascript:;" class="edit-button text-danger" (click)="showEditPopup()">
+      <i class="fa fa-pencil-square-o white-text"></i>
+    </a>
+    <a href="javascript:;" class="edit-button text-warning" (click)="showDestroyPopup()">
+      <i class="fa fa-times white-text"></i>
+    </a>
+  </div>
+  <div class="row d-flex flex-row align-items-center justify-content-center">
+    <img src="{{ imagePath }}/main/{{ service.id }}.png" alt="service icon">
+    <section class="col-xs-12 d-flex flex-column justify-content-center align-items-center pt-3">
+      <h4 class="funky-town text-white h4-responsive my-4 ml-2 text-center">{{ service.name }}</h4>
+      <p class="text-grey-3 text-center m-0" [innerHTML]="service.description | htmlTemplate"></p>
+    </section>
+  </div>
+</figure>

@@ -1,0 +1,31 @@
+<div class="node-image mb-4">
+  <div class="image" [ngStyle]="{ 'height': imgDisplay }">
+      <img  [src]="imagePath + 'projects/nodes/image/' + node.id + '.jpg'" alt="{{ node.type }} image" #image>
+  </div>
+  <ng-container *ngIf="node.code !== 0">
+    <button type="button" class="btn toggle-code m-0" (click)="toggleCode(codeSection, image)">
+      {{ codeStatus }}<i class="fa fa-plus-circle text-white ml-3"></i>
+    </button>
+    <div class="under-the-hood" [ngStyle]="{ 'height.px': codeDisplay }">
+      <pre #codeSection class="m-0  pt-0 px-4">
+        <code class="language-{{ codeLanguage }}" [innerHTML]="parsedCode"></code>
+      </pre>
+    </div>
+  </ng-container>
+</div>
+<div style="position: relative">
+  <h4 class="regular text-grey-2 mb-3" *ngIf="node.type !== 'feature'; else small_title">{{ node.title }}</h4>
+  <ng-template #small_title>
+    <h5 class="regular text-grey-2 mb-2">{{ node.title }}</h5>
+  </ng-template>
+  <p class="text-grey-3 mb-3" [innerHTML]="node.content | htmlTemplate"></p>
+  <ng-content></ng-content>
+  <div class="edit-controls mt-0 mr-0" *ngIf="adminService.editMode" >
+    <a href="javascript:;" class="edit-button text-danger" (click)="showEditPopup()">
+      <i class="fa fa-pencil-square-o white-text"></i>
+    </a>
+    <a href="javascript:;" class="edit-button text-warning" (click)="showDestroyPopup()">
+      <i class="fa fa-times white-text"></i>
+    </a>
+  </div>
+</div>

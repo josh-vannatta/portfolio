@@ -1,0 +1,18 @@
+:host {
+  display: block;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 6rem !important;
+}
+
+.ribbon {
+  top: -80px;
+}
+
+.ribbon:last-of-type {
+  top: 80px;
+}
+
+.btn-floating {
+  top: 100px;
+}

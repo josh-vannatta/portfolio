@@ -1,0 +1,83 @@
+<!-- Hero -->
+<section class="almost-hero gradient-themecontrast">
+  <!-- Background icon -->
+  <div class="abs-full container project-icon py-5" style="z-index: -1">
+    <img [src]="imagePath + 'projects/icons/' + project.id + '.svg'" alt="" class="h-100 abs-center">
+  </div>
+  <!-- Content -->
+  <div class="container d-flex flex-column justify-content-end align-items-center abs-full">
+    <div class="col-lg-8 col-md-10 d-flex flex-column justify-content-end pb-5 px-0">
+      <!-- Edit icon -->
+      <div class="edit-controls alt" *ngIf="adminService.editMode" >
+        <a href="javascript:;" class="edit-button text-danger" (click)="showIconPopup()">
+          <i class="fa fa-pencil-square-o white-text"></i>
+        </a>
+      </div>
+      <!-- Description -->
+      <h2 class="text-white normal pt-5 mb-2">{{ project.client | titlecase }} - {{ project.title }}</h2>
+      <h5 class="text-white mb-4">
+        <span *ngFor="let service of project.services; let i = index" class="normal">
+          {{ service.name.toLowerCase() }} {{ i == project.services.length -1 ? '' : '/' }}
+        </span>
+      </h5>
+      <!-- Skill array -->
+      <div class="skill-list d-flex flex-row flex-wrap mb-5">
+        <div class="d-flex flex-row align-items-center px-3 py-2 skill-item background-themegen mr-2 my-2" *ngFor="let skill of project.skills">
+          <img src="{{ imagePath }}skills/{{skill.id}}.svg" alt="icon">
+          <h5 class="text-white regular m-0">{{ skill.name }}</h5>
+        </div>
+      </div>
+      <!--/ Content -->
+    </div>
+  </div>
+</section>
+<!-- Overview -->
+<section class="pb-5 container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <project-node class="mb-3" *ngIf="overview" [node]="overview">
+        <a href="{{ project.site_url }}" class="btn gradient-focus">
+          Visit website <i class="fa fa-chevron-circle-right text-white ml-1" target="_blank"></i>
+        </a>
+      </project-node>
+      <button
+        *ngIf="adminService.editMode && !overview"
+        (click)="showOverviewPopup()"
+        type="button"
+        class="btn btn-blue-grey edit-button m-0">
+        Add project overview
+      </button>
+    </div>
+  </div>
+</section>
+<!-- Features -->
+<section class="pb-5 container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <h4 class="regular text-grey-2 mb-5">Key features</h4>
+      <project-node class="mb-3" *ngFor="let node of nodeList" [node]="node"></project-node>
+      <button
+        *ngIf="adminService.editMode"
+        (click)="showFeaturePopup()"
+        type="button"
+        class="btn btn-blue-grey edit-button m-0">
+        Add new feature
+      </button>
+    </div>
+  </div>
+</section>
+<!-- Conclusion -->
+<section class="pb-5 container mb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <project-node class="mb-3" *ngIf="conclusion" [node]="conclusion"></project-node>
+      <button
+        *ngIf="adminService.editMode && !conclusion"
+        (click)="showConclusionPopup()"
+        type="button"
+        class="btn btn-blue-grey edit-button m-0">
+        Add project conclusion
+      </button>
+    </div>
+  </div>
+</section>

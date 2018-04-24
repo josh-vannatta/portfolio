@@ -1,0 +1,74 @@
+:host {
+	position: fixed;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 20;
+	right: 0;
+}
+
+section {
+	border: 1px solid #ccc;
+	background: white;
+	position: relative;
+	border-radius: 0 0 0 5px;
+	right: -100%;
+}
+
+section.active {
+	right: -5px;
+}
+
+a {
+	position: absolute;
+	left: -27px;
+	background: #ffffff;
+	top: 3px;
+	z-index: -1;
+	padding: 4px !important;
+	i {
+		padding: 5px;
+		color: white;
+	}
+}
+
+h6.active {
+	color: #01919d !important;
+}
+
+input[type=checkbox]{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+label {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 50px;
+	height: 24px;
+	background: grey;
+	display: block;
+	border-radius: 100px;
+	position: relative;
+}
+
+label:after {
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 4px;
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+input:checked + label {
+	background: #01919d;
+}
+
+input:checked + label:after {
+	left: calc(100% - 5px);
+	transform: translateX(-100%);
+}

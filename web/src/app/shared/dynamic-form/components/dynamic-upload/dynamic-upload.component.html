@@ -1,0 +1,16 @@
+<div class="md-form" [formGroup]="group">
+  <input type="hidden" name="{{ template.name }}" formControlName="{{ template.name }}">
+  <div [ngClass]="{'file-field mb-4': true,
+    'valid': group.controls[template.name].valid,
+    'invalid': group.controls[template.name].invalid,
+    'touched': group.controls[template.name].touched,
+    'pending': group.controls[template.name].pending }
+    ">
+    <p>{{ template.label }}</p>
+      <div class="fake-input d-flex flex-row">
+        <button class="btn background-themelight py-2 m-0 mr-2" name="button">Upload</button>
+        <p class="m-0">{{ selectedFile }}</p>
+      </div>
+      <input type="file" (click)="touch()" (change)="onSVGSelected($event)">
+    </div>
+</div>

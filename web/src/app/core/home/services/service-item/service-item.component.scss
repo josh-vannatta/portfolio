@@ -1,0 +1,64 @@
+:host {
+  max-width: 400px;
+}
+
+h4 {
+  z-index: 0;
+}
+
+figure {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    opacity: .7;
+    background: #636f77;
+    top: 0;
+    height: 4px;
+    transition: .2s ease;
+    right: 0;
+    left: 0;
+  }
+  &:hover {
+    &:after {
+      opacity: 1;
+    }
+  }
+}
+
+
+h4.funky-town {
+  &:after {
+    background: #636f77;
+    height: calc(100% + 16px);
+    top: -8px;
+  }
+}
+
+img {
+  width: 100%;
+  max-width: 160px;
+  image-rendering: -moz-crisp-edges;
+   image-rendering: -o-crisp-edges;
+   image-rendering: -webkit-optimize-contrast;
+   -ms-interpolation-mode: nearest-neighbor;
+   border-radius: 50%;
+   overflow: hidden;
+   border: 1px solid white;
+}
+
+@media screen and (max-width: 1200px) {
+  :host {
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .service-content {
+    padding: 15px 20px 0;
+  }
+}

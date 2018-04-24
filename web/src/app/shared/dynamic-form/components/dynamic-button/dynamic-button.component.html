@@ -1,0 +1,10 @@
+<div class="d-flex flex-row justify-content-center mt-4" [formGroup]="group">
+  <button *ngFor="let button of template.buttons"
+    type="{{ button.type }}"
+    class="btn {{ button.class }} mx-1"
+    [disabled]="!group.valid && button.type == 'submit'"
+    (click)="call(button.method)">
+  {{ button.label }}
+  <i *ngIf="button.icon" class="fa fa-{{ button.icon }} ml-1"></i>
+  </button>
+</div>

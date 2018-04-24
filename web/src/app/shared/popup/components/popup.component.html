@@ -1,0 +1,38 @@
+<section class="fixed-full mask-dark"
+  *ngIf="service.visible">
+  <div class="container">
+    <div class="row justify-content-center py-4">
+      <div class="col-lg-7 col-md-11 my-3">
+        <button type="button"
+          class="btn btn-sm p-0 btn-floating red close-button"
+          *ngIf="service.canClose"
+          mdbRippleRadius
+          (click)="close()">
+            <i class="fa fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <div class="row justify-content-center py-4">
+      <div class="popup message col-lg-6 col-md-10" *ngIf="!service.response">
+        <figure class="z-depth-2 p-5 rounded white">
+          <div class="abs-full mask-white" *ngIf="service.attempting">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
+          <p class="h5 text-center mb-4">{{ service.title }}</p>
+          <div [innerHTML]="service.content" class="text-center"></div>
+          <dynamic-form *ngIf="service.formTemplate.length"
+            [template]="service.formTemplate"
+            (submitted)="submitForm($event)">
+          </dynamic-form>
+        </figure>
+      </div>
+      <div class="popup-response col-lg-5 col-md-9" *ngIf="service.response">
+        <figure class="z-depth-2 white p-4 rounded d-flex flex-column align-items-center">
+          <h4 class="regular my-3" *ngIf="service.status">{{ service.status }}</h4>
+          <p class="text-center text-grey-3" [innerHTML]="service.message"></p>
+          <button class="btn background-themelight" (click)="close()" style="min-width: 200px">{{ response }}</button>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

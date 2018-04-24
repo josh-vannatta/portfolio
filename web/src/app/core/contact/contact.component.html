@@ -1,0 +1,126 @@
+<section class="almost-hero gradient-themedark-bottom">
+  <div class="google-map abs-full">
+      <div id="map" #mapElement></div>
+      <div [ngClass]="{ 'too-big' : true, active: searchTooBig }"></div>
+  </div>
+  <div class="abs-full gradient-themedark-bottom overlay" #overlay></div>
+  <div class="abs-full" style="overflow: visible">
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <article class="contact-interactive text-center col-lg-8 p-0">
+          <!-- Contact Game -->
+          <!-- Intro -->
+          <figure [ngClass]="{'content px-3': true, active: !heroState}">
+            <h2 class="mb-3 h2-responsive text-white">Want to make something awesome together?</h2>
+            <a class="btn btn-small gradient-focus" (click)="heroState = !heroState">
+              See how easy it is <i class="fa fa-arrow-circle-right text-white ml-1"></i>
+            </a>
+          </figure>
+          <!-- Interactions -->
+          <figure [ngClass]="{'search': true, active: heroState}">
+            <!-- 1. Search location -->
+            <div class="d-flex flex-row map-search  px-3" *ngIf="!searchStatus">
+              <input type="text"
+                placeholder="Where are you?"
+                class="mb-0 mr-2 map-search"
+                [(ngModel)]="searchLocation"
+                (click)="searchResponse = ''"
+                (keydown.enter)="getGeocode()">
+              <a class="btn btn-small gradient-focus m-0 p-3 waves-light"
+                mdbRippleRadius (click)="getGeocode()">Search</a>
+            </div>
+            <!-- 2. Find routes -->
+            <div class="justify-content-center  px-3" *ngIf="!searchResults">
+              <p class="text-white text-center">{{ searchResponse }}</p>
+              <a class="btn btn-small gradient-focus m-0 mb-3 waves-light"
+                mdbRippleRadius
+                (click)="showDirections()"
+                *ngIf="searchStatus"
+                >Check distance</a>
+            </div>
+            <!-- 3. Display results -->
+            <div class="justify-content-center text-center results map-search rounded mb-2 pb-1" *ngIf="searchResults">
+              <h3 class="text-white mt-2">Only {{ searchResponse }} miles to travel!</h3>
+              <div class="d-flex flex-wrap justify-content-center mb-3">
+                <div class="map-search d-flex flex-row align-items-center rounded mx-1 mb-2" *ngFor="let route of searchResults">
+                  <i class="fa fa-{{ route.method }} mr-2 color-focus"></i>
+                  <p class="m-0">{{ getBestDuration(route.time) }} </p>
+                </div>
+                <div class="map-search d-flex flex-row align-items-center rounded mx-1 mb-2 active">
+                  <i class="fa fa-laptop mr-2 color-focus"></i>
+                  <p class="m-0">5 minutes</p>
+                </div>
+              </div>
+            </div>
+            <p *ngIf="searchResults" class="text-white px-3" style="line-height: 2.2rem">Luckily we can work together no matter where you are in the world. <br/>Take a few minutes and reach out if you're interested!</p>
+            <!-- 4. Cancel -->
+            <a href="javascript:;"
+            (click)="resetSearch()"
+            class="floating-link"
+            style="color: #13a0c7">Neato! Take me back</a>
+          </figure>
+          <!--/ Contact game  -->
+        </article>
+      </div>
+      <a class="btn-floating btn-lg onwards-button waves-dark z-depth-2"
+         mdbRippleRadius
+         pageScroll
+         [pageScrollDuration]="500"
+         href=".direct-info"
+         style="top: -40px"><i class="fa fa-chevron-down"></i></a>
+    </div>
+  </div>
+</section>
+<section class="direct-info container bounce justify-content-center row pb-3 m-auto">
+  <h3 class="text-center mb-5 wide col-12">Get in touch</h3>
+  <div class="col-10 p-0">
+    <div class="row">
+      <div class="col-md-4 flex-border mb-5">
+        <figure class="d-flex flex-column align-items-center p-2">
+          <img src="/assets/images/vector/contact/land.svg" alt="Mr stick figure" width="80">
+          <h5 class="regular text-grey-2 mt-3 wide">BY LAND</h5>
+          <p class="text-center grey-text regular">Track me down in downtown Denver <br/>
+          1350 Grant St, Denver, CO</p>
+        </figure>
+      </div>
+      <div class="col-md-4 flex-border mb-5">
+        <figure class="d-flex flex-column align-items-center p-2">
+          <img src="/assets/images/vector/contact/air.svg" alt="Mr stick figure" width="80">
+          <h5 class="regular text-grey-2 mt-3 wide">BY AIR</h5>
+          <p class="text-center grey-text regular">Drop me a line any time<br/>
+          (+1)720.412.2575</p>
+        </figure>
+      </div>
+      <div class="col-md-4 flex-border mb-5">
+        <figure class="d-flex flex-column align-items-center p-2">
+          <img src="/assets/images/vector/contact/post.svg" alt="Mr stick figure" width="80">
+          <h5 class="regular text-grey-2 mt-3 wide">BY POST</h5>
+          <p class="text-center grey-text regular">Send me an email and get support<br/>
+          josh@joshuavn.dev</p>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="contact-form pb-5 container bounce row m-auto">
+  <div class="col-md-1 order-2 order-md-1">
+    <div class="d-flex flex-column social-links align-items-end">
+      <a *ngFor="let link of socialLinks"
+        href="{{ link.href }}"
+        target="_blank" mdbRippleRadius
+        class="btn btn-floating waves-light gradient-focus z-depth-1 hoverable">
+        <i class="fa {{ link.icon }}"></i>
+      </a>
+    </div>
+  </div>
+  <div class="col-md-10 order-1 order-md-2">
+    <div class="z-depth-2 p-5 z-collapse-xs">
+      <h3 class="text-center text-grey-2 mb-5 wide">Send me a message</h3>
+      <dynamic-form class="py-3 pt-4 contact-form"
+        [reset]="formReset"
+        [template]="formTemplate"
+        (submitted)="sendContactEmail($event)">
+      </dynamic-form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,128 @@
+
+.navbar-toggler i.fa.fa-bars {
+  display: none;
+}
+
+.navbar-toggler {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.navbar-toggler-icon {
+  background-image: none !important;
+  padding: 25px;
+  position: relative;
+  z-index: 20;
+}
+
+.navbar.fixed-top, .faux-navbar {
+  background-color: rgba(0,0,0,0) !important;
+  box-shadow: none;
+  &:before {
+    transition: .6s ease;
+    content: "";
+    background-color: rgba(0,0,0,0);
+    @include background-gradient-themedark(15deg);
+    width: calc(100% + 30px);
+    height: 0;
+    position: absolute;
+    left: -30px;
+    top: -25px;
+    z-index: -1;
+    transform: skewY(-0.5deg);
+  }
+}
+
+.faux-navbar {
+  height: 73px;
+  top: 0;
+  position: relative;
+  &:before {
+    height: calc(100% + 30px);
+  }
+}
+
+.navbar.fixed-top.show-background {
+  top: 0px;
+  &:before {
+    height: calc(100% + 30px);
+  }
+  logo div{
+    &:after {
+      width: 20px;
+      height: 20px;
+      opacity: 0;
+    }
+  }
+}
+
+.navbar.fixed-top.show-menu {
+  &:before {
+    transition: .2s ease-in;
+  }
+  logo div{
+    &:after {
+      width: 120px;
+      height: 120px;
+      opacity: 0.5;
+    }
+  }
+}
+
+.navbar .container {
+  position: relative;
+}
+
+.navbar .hamburger {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 2px;
+  transition: .2s ease;
+  opacity: 0;
+  z-index: -1;
+}
+
+.navbar .hamburger .hamburger-inner,
+.navbar .hamburger .hamburger-inner:after,
+.navbar .hamburger .hamburger-inner:before {
+  background-color: white;
+  height: 2px;
+}
+
+@media screen and (max-width: 768px) {
+  div.navbar-collapse.collapse.show {
+    overflow: hidden;
+    height: 100%;
+    height: calc(100vh - 60px) !important;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 100%;
+  }
+
+  div.navbar-collapse a.nav-link{
+    text-align: center;
+    font-size: 22px;
+    padding: 28px 10px;
+    font-weight: 300 !important;
+  }
+
+  div.navbar-collapse .nav-item {
+    margin: 0;
+  }
+
+  div.navbar-collapse .nav-item:first-of-type{
+    margin-top: calc(50vh - 200px) !important;
+  }
+
+  div.navbar-collapse .nav-item:last-of-type{
+    margin-bottom: calc(50vh - 180px) !important;
+  }
+
+  .navbar .hamburger {
+    z-index: unset;
+    opacity: 1;
+  }
+}

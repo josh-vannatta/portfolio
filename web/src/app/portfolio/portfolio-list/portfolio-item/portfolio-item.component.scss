@@ -1,0 +1,77 @@
+:host {
+  position: relative;
+  display: block;
+  top: -30px;
+}
+
+article {
+  position: relative;
+  z-index: 0;
+  padding: 8rem 0;
+  .content {
+    h3 {
+      width: max-content;
+    }
+    .destinctions {
+      border-top: 1px solid white;
+      figure {
+        transition: .5s ease;
+        cursor: pointer;
+        background: rgba(0,0,0,0);
+        overflow: hidden;
+        small {
+          white-space: nowrap;
+          text-transform: lowercase;
+        }
+      }
+      figure.active {
+        background: rgba(0,0,0,0.2);
+        width: auto;
+      }
+    }
+  }
+}
+
+.service-icon {
+  max-height: 20px;
+  min-width: 20px;
+}
+
+.image {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+
+.overlay {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.5);
+  .funky-town {
+    &:after {
+      background: #565656;
+    }
+  }
+}
+
+.active .overlay {
+  opacity: 1;
+}
+
+.edit-controls {
+  margin: -50px 0;
+}
+
+.edit-button {
+  border-radius: 3px;
+  background: rgba(255,255,255,.1);
+  opacity: 1;
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .destinctions {
+    width: 200%;
+    left: calc(-100% - 30px);
+    position: relative;
+  }
+}

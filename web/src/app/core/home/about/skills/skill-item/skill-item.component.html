@@ -1,0 +1,24 @@
+<article #container [ngStyle]="{ 'padding-bottom.px': describeY}" class="skill-content">
+  <a href="javascript:;" (click)="showDescription(description)" [ngClass]="{'active' : describeView !== 'hidden'}">
+    <div class="d-flex flex-row align-items-center px-3 py-2 with-after">
+      <img src="{{ imagePath }}/{{skill.id}}.svg" alt="icon">
+      <h5 class="text-white regular m-0">{{ skill.name }}</h5>
+    </div>
+  </a>
+  <figure [ngStyle]="{visibility: describeView, 'height.px': describeY}" class="skill-description">
+    <div class="mb-2 mt-3 py-3 px-4 background-theme text-white" #description>
+      <section class="edit-controls" *ngIf="adminService.editMode" >
+        <a href="javascript:;" class="edit-button text-danger" (click)="showEditPopup()">
+          <i class="fa fa-pencil-square-o white-text"></i>
+        </a>
+        <a href="javascript:;" class="edit-button text-warning" (click)="showDestroyPopup()">
+          <i class="fa fa-times white-text"></i>
+        </a>
+      </section>
+      <div class="d-flex flex-row justify-content-between">
+        <h6 class="dense">{{ skill.years }} year{{ skill.years == 1 ? '' : 's' }}</h6>
+      </div>
+      <p class="regular" [innerHTML]="skill.description | htmlTemplate"></p>
+    </div>
+  </figure>
+</article>

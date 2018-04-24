@@ -1,0 +1,33 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "baseUrl" : "src",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "paths": {
+      "@app/*": ["./app/*"],
+      "@auth/*": ["./app/auth/*"],
+      "@shared/*": ["./app/shared/*"],
+      "@directives/*": ["./app/directives/*"],
+      "@core/*": ["./app/core/*"],
+      "@pipes/*": ["./app/pipes/*"],
+      "@games/*": ["./app/games/*"]
+    }
+  },
+  "include": [
+    "node_modules/angular-bootstrap-md/**/*.ts",
+     "src/**/*.ts"
+   ],
+}

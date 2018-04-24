@@ -1,0 +1,9 @@
+<section [ngClass]="{'edit-section': true, 'active': showEditMenu}" #editControl>
+  <div class="edit-section d-flex flex-column px-3 py-1 align-items-center z-depth-2" (click)="checkToggler(editToggler)" (clickOutside)="showEditMenu = false">
+    <a class="p-1 z-depth-2" (click)="showEditMenu = !showEditMenu">
+      <i class="fa fa-pencil gradient-focus"></i>
+    </a>
+    <h6 [ngClass]="{'pr-2 grey-text regular my-2': true, active: adminService.editMode}">Edit mode</h6>
+    <input type="checkbox" id="switch" #editToggler/><label for="switch">Toggle</label>
+  </div>
+</section>

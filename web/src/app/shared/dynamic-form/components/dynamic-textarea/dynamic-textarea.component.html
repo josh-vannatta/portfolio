@@ -1,0 +1,14 @@
+<div class="md-form" [formGroup]="group">
+    <i class="grey-text fa fa-{{ template.icon }} prefix" *ngIf="template.icon"></i>
+    <textarea type="text" class="md-textarea"
+      style="height: 100px" mdbActive
+      rows="{{ template.rows ? template.rows : 5}}"
+      formControlName="{{ template.name }}"
+      name="{{ template.name }}"> </textarea>
+    <label for="{{ template.name }}" [ngClass]="{invalid: onInputValid(template.name)}">{{ template.label}} </label>
+    <div *ngIf="onInputValid(template.name)" class="error-msg-container" style="height: 15px; margin-top: -5px; margin-bottom: 5px;">
+      <small class="text-danger error-msg mt-0" *ngFor="let error of group.controls[template.name].errors | formError">
+      {{ template.label + error }}
+      </small>
+    </div>
+</div>

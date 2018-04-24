@@ -1,0 +1,9 @@
+<core-header></core-header>
+<admin-edit *ngIf="adminService.isLoggedIn"></admin-edit>
+<core-container id="core">
+  <main #appContent>
+    <router-outlet></router-outlet>
+  </main>
+  <core-footer #footerComponent></core-footer>
+</core-container>
+<popup></popup>
