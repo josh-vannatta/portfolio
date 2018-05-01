@@ -17,7 +17,7 @@
       (mouseleave)="hoverStatus = false">
         <div
         class="white z-depth-2 rounded image"
-        [ngStyle]="{'background-image': 'url(' + imagePath + project.id + '.png)' }">
+        [ngStyle]="{'background-image': 'url(' + imagePath + '/projects/' + project.id + '.png)' }">
         </div>
         <div class="overlay abs-full d-flex flex-column justify-content-center align-items-center">
           <h4 class="funky-town text-white">View project</h4>
@@ -39,7 +39,7 @@
             [ngStyle]="{'width.px': serviceDetail == i ? serviceWidth : 30 }"
             (mouseenter)="showService(i)"
             (mouseleave)="hideService(i)">
-            <img src="http://127.0.0.1:8000/storage/services/icons/{{ service.id }}.svg" alt="" class="service-icon">
+            <img src="{{imagePath}}/services/icons/{{ service.id }}.svg" alt="" class="service-icon">
             <small class="mx-2 text-white regular" id="service-{{ i }}">{{ service.name }}</small>
           </figure>
         </div>

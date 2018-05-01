@@ -44,13 +44,13 @@ export class PortfolioListComponent implements OnInit {
     this.skillList = this.skillService.getSkills();
     this.offeringService.servicesLoaded.subscribe(
       (services: ServiceOffered[]) => {
-        this.formTemplate[3]['array'] = services;
+        this.formTemplate[4]['array'] = services;
         this.serviceList = services
       }
     );
     this.skillService.skillsLoaded.subscribe(
       (skills: Skill[]) => {
-        this.formTemplate[4]['array'] = skills;
+        this.formTemplate[5]['array'] = skills;
         this.skillList = skills
       }
     );

@@ -117,4 +117,8 @@ export class SkillItemComponent implements OnInit, OnChanges {
       );
   }
 
+  toFloat(string) {
+    return parseFloat(string);
+  }
+
 }

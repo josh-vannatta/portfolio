@@ -16,7 +16,7 @@
         </a>
       </section>
       <div class="d-flex flex-row justify-content-between">
-        <h6 class="dense">{{ skill.years }} year{{ skill.years == 1 ? '' : 's' }}</h6>
+        <h6 class="dense">{{ toFloat(skill.years) }} year{{ skill.years == 1 ? '' : 's' }}</h6>
       </div>
       <p class="regular" [innerHTML]="skill.description | htmlTemplate"></p>
     </div>

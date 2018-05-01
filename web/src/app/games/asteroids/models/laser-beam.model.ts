@@ -12,7 +12,8 @@ export class LaserBeam extends ActiveObject {
     this.setVelocity({ x: .3 + ship.velocity.x, y: 0, z: 0})
     this.material.opacity = .8;
     this.mesh.scale.set( .15, .15, 1.2);
-    this.name == 'laser';
+    this.name = 'laser';
+    this.interactions = true;
   }
 
   timeout = 200;

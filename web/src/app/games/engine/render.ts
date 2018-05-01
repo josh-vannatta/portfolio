@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-// require('imports-loader?THREE=three!exports-loader?THREE.OutlineEffect!three\/examples\/js\/effects\/OutlineEffect');
+require('imports-loader?THREE=three!exports-loader?THREE.OutlineEffect!three\/examples\/js\/effects\/OutlineEffect');
 import { Observable } from 'rxjs/Observable';
 import { Viewport } from './viewport';
 
@@ -16,7 +16,7 @@ export class Render extends Viewport {
     this.renderer = new THREE.WebGLRenderer({ alpha: true });
     this.loader = new THREE.JSONLoader();
     this.importer = new THREE.ObjectLoader();
-    // this.effect = new THREE.OutlineEffect( this.renderer);
+    this.effect = new THREE.OutlineEffect( this.renderer);
     this.clock = new THREE.Clock();
   }
 
@@ -157,8 +157,8 @@ export class Render extends Viewport {
       mixer.clipAction(clip).play();
       mixer.update(delta);
     })
-    // this.effect.render( this.scene, this.camera );
-    this.renderer.render( this.scene, this.camera )
+    this.effect.render( this.scene, this.camera );
+    // this.renderer.render( this.scene, this.camera )
   }
 
 }

@@ -26,7 +26,7 @@ export class PortfolioItemComponent implements OnInit {
     public adminService: AdminService,
     private popupService: PopupService,
     private projectService: ProjectService,
-  ) { this.imagePath = globals.serverUrl + 'storage/projects/'; }
+  ) { this.imagePath = globals.serverUrl + 'storage'; }
 
   ngOnInit() {
     this.formTemplate = [
