@@ -35,12 +35,12 @@ export class InteractiveThesisComponent implements OnInit {
   ngOnInit() {
       this.game = new AsteroidsGame(this.gameCanvas.nativeElement);
       this.game.start();
-      window.addEventListener("keydown", e=>{
-        switch(e.keyCode){
-            case 37: case 39: case 38:  case 40:
-              e.preventDefault();
-        }
-      })
+      // window.addEventListener("keydown", e=>{
+      //   switch(e.keyCode){
+      //       case 37: case 39: case 38:  case 40:
+      //         e.preventDefault();
+      //   }
+      // })
   }
 
 }
