@@ -25,16 +25,16 @@ export class InteractiveThesisComponent implements OnInit {
     this.game.handleKeyUp(event);
   }
   @HostListener('window:scroll', ['$event']) onscroll(event) {
-    if (window.scrollY > this.gameCanvas.nativeElement.clientHeight)
-      this.game.stop()
-    else this.game.resume();
+    // if (window.scrollY > this.gameCanvas.nativeElement.clientHeight)
+    //   this.game.stop()
+    // else this.game.resume();
   }
 
   constructor() {  }
 
   ngOnInit() {
       this.game = new AsteroidsGame(this.gameCanvas.nativeElement);
-      this.game.start();
+      // this.game.start();
       // window.addEventListener("keydown", e=>{
       //   switch(e.keyCode){
       //       case 37: case 39: case 38:  case 40:
