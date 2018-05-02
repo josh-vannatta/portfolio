@@ -1,7 +1,7 @@
 <div class="faux-navbar"></div>
 <section class="row signup justify-content-center py-5 ">
 <div class="col-lg-4 col-md-7 py-5">
-  <div class="card mb-5 z-depth-2">
+  <div class="card mb-5 z-depth-2 modal-styled">
     <div class="card-body p-5">
       <ng-container *ngIf="adminService.isLoggedIn; else loginForm">
         <h3 class="h3-responsive text-center text-grey-2 light  mb-3">Well, hello again, me! Nice to see ya</h3>
@@ -16,6 +16,10 @@
         </div>
         <h3 class="h3-responsive text-center text-grey-2 light  mb-1">Admin login</h3>
         <p class="text-grey-3 text-center mb-5">If you're not me, try <a routerLink="/" class="floating-link">going home</a> instead. </p>
+        <div class="alert alert-danger d-flex justify-content-between" style="position: relative; top: -20px" role="alert" *ngIf="error">
+          {{ error }}
+          <div class="dense pointer" (click)="error = null">&times;</div>
+        </div>
         <dynamic-form
           [template]="formTemplate"
           (submitData)="attemptLogin($event)">

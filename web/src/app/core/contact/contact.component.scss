@@ -1,3 +1,11 @@
+:host {
+  display: block;
+  background: #eaedef;
+  box-shadow: 0 20px #eaedef, 0 -20px #eaedef;
+  z-index: -1;
+  position: relative;
+}
+
 .almost-hero {
   .overlay {
     transition: 1s ease;

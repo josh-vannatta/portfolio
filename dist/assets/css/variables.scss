@@ -1,0 +1,31 @@
+$blue-0: #000c17;
+$blue-1: #012c3f;
+$blue-2: #023e5e;
+$blue-3: #006591;
+
+$blue-primary: #2196f3;
+
+$teal-0: #17bebb;
+$teal-1: #00abaf;
+$teal-2: #00a99d;
+$teal-3: #02939e;
+
+$teal-primary: #02939e;
+
+$grey-0: #12232b;
+$grey-1: #34495d;
+$grey-2: #535556;
+$grey-3: #71787c;
+
+@mixin background-gradient-themedark($dir) {
+  background: linear-gradient($dir, $blue-0, $blue-2);
+}
+@mixin background-gradient-theme($dir) {
+  background: linear-gradient($dir, $blue-2, $blue-3);
+}
+@mixin background-gradient-themecontrast($dir) {
+  background: linear-gradient($dir, $teal-3, $blue-3);
+}
+@mixin background-gradient-focus($dir) {
+  background: linear-gradient($dir, $teal-2, $blue-primary);
+}

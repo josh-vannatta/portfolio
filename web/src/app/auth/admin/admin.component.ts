@@ -9,6 +9,7 @@ import { AdminService } from './admin.service';
 })
 export class AdminComponent implements OnInit {
   attempting: boolean = false;
+  error: string = null;
   formTemplate = [
     { element: 'input', name: 'email', label: 'My email address', rules: 'required|email', icon: 'envelope' },
     { element: 'input', type: 'password', name: 'password', label: 'My password', rules: 'required', icon: 'lock' },
@@ -26,7 +27,14 @@ export class AdminComponent implements OnInit {
 
   attemptLogin(form) {
     this.attempting = true;
-    this.adminService.login(form.email, form.password);
+    this.adminService.login(form.email, form.password)
+      .subscribe((error: string) => {
+          setTimeout(()=>{
+            this.error = error;
+            this.attempting = false;
+          }, 300)
+        }
+      );
   }
 
   attemptLogout() {

@@ -15,14 +15,12 @@ export class HtmlTemplatePipe implements PipeTransform {
   scrub(value, regex, method) {
     let curMatch;
     while( curMatch = regex.exec(value) ) {
-      console.log(curMatch)
         value = this[method](value, curMatch);
     }
     return value;
   }
 
   links(value, match) {
-    console.log(match)
     let link = match[1].split('|');
     return value.replace(match[0],
       `<a href="${link[1]}" target="_blank" class="floating-link">${link[0]}</a>`

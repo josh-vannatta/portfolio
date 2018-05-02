@@ -27,22 +27,34 @@ export class AdminService {
       this.oauthToken = new HttpHeaders()
         .set('Accept', 'application/json')
         .set('Authorization', 'Bearer ' + token);
-
       return this.http.get(
-        this.globals.serverUrl + 'api/auth/admin', { headers: this.oauthToken }
-      ).subscribe(
-        (response: any) => this.isLoggedIn = response,
-        (error: any) => this.isLoggedIn = false
-      );
-
+       this.globals.serverUrl + 'api/auth/admin', { headers: this.oauthToken }
+       );
   }
 
   login(username: string, password: string) {
     const passport = this.globals.getPassport(username, password);
-    return this.getAccessToken(passport).subscribe(
-      (response: any) => this.authenticate(response.access_token),
-      (error: any) => this.isLoggedIn = false
-    );
+    return new Observable(observer=>{
+      this.getAccessToken(passport).subscribe(
+        (response: any) => {
+          this.authenticate(response.access_token)
+          .subscribe(
+            (response: any) => {
+              this.isLoggedIn = response;
+              if (!response == false)
+                observer.next(`It appears my email / password are incorrect. Hmmm....`);
+            },
+            (error: any) => {
+              return observer.next(`Could not log in! The login token has expired!`);
+            }
+          );
+        },
+        (error: any) => {
+          this.isLoggedIn = false;
+          return observer.next(`It appears my email / password are incorrect. Hmmm....`);
+        }
+      );
+    })
   }
 
   logout() {
