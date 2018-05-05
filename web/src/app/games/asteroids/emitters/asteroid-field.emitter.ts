@@ -15,10 +15,14 @@ export class AsteroidField extends Emitter{
     this.types = types;
   }
 
+  private fills = 0
   fill(amt, args = null) {
     this.emit(amt);
     this.asteroids.push(...this.seed('newAsteroids', args));
+    this.fills++;
   }
+
+  private timer = 200;
 
   animate(window) {
 
@@ -26,9 +30,6 @@ export class AsteroidField extends Emitter{
       this.fill(1, explosion);
       this.explosions.splice(index, 1);
     });
-
-    if (this.asteroids.length < this.max)
-      this.fill(this.max -  this.asteroids.length);
 
     this.asteroids.forEach((asteroid, index)=>{
       asteroid.animate(this.view);
@@ -44,11 +45,20 @@ export class AsteroidField extends Emitter{
       }
       if (this.interactions && asteroid.interactions)
         asteroid.interact(this.interactors, this.view);
-    })
+    });
 
-    if (!this.view.selected) this.view.selected = this.asteroids[
+    let randsteroid = this.asteroids[
       Math.floor(Math.random() * this.asteroids.length)
     ]
+
+    if (!this.view.selected && randsteroid.mesh && randsteroid.mesh.position.z > 10)  this.view.selected = randsteroid;
+
+        if (this.timer <= 0 ) {
+          this.timer = Math.random() * 100 + 180;
+          this.fill(1);
+        } else {
+          this.timer--;
+        }
   }
 
   private newAsteroids(pos = null, size = null) {
@@ -56,12 +66,12 @@ export class AsteroidField extends Emitter{
     if (pos == null) pos = this.randomPosition();
     let scale = Math.random();
     if (size == null ) {
-      size = scale > .6 ? 'large' : 'medium';
+      size = scale > .5 ? 'large' : 'medium';
       if (scale < .3 ) size = 'small';
     }
     let which = Math.floor(Math.random() * this.types[size].length);
     let asteroid = new Asteroid(  this.types[size][which]);
-    asteroid.mesh.position.set(pos.x, pos.y, pos.z);
+    asteroid.mesh.position.set(pos.x * .5, pos.y * .5, this.fills == 0 ? Math.abs(pos.z) * 5 - 10 : 25);
     if (explode) asteroid.maxSpeed();
     return [asteroid];
   }

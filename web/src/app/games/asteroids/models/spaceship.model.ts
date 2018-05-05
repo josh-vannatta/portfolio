@@ -14,8 +14,10 @@ export class Spaceship extends ActiveObject {
 
   constructor(spaceship) {
     super(.8);
-    this.loadMesh(spaceship.geometry, spaceship.materials);
+    // this.loadMesh(spaceship.geometry, spaceship.materials);
+    this.addOutline(spaceship.geometry);
     this.setVelocity({ x: 0, y: 0, z: 0 });
+    this.mesh.position.z= -15;
     this.mesh.position.x= Math.random() * 5 * this.negPos();
     this.mesh.position.y= Math.random() * 5 * this.negPos();
     this.interactions = false;
@@ -29,32 +31,33 @@ export class Spaceship extends ActiveObject {
 
   animate(view) {
     view.laser = false;
+    this.bindOutline();
     this.init();
     const isMax = this.velocity.x > this.maxSpeed;
     const isMin = this.velocity.x < this.minSpeed;
     if (this.disableAutopilot(view, isMin, isMax)) return;
 
     const detect = view.selected && this.distanceFrom(view.selected) > 50;
-    if (this.flee || detect || isMin) this.velocity.x += isMax ? 0: .001;
+    if (this.flee || detect || isMin) this.velocity.x += isMax  ? 0: .001;
     else this.velocity.x *= .96;
 
     if (this.flee) this.evade(view);
     else if (view.selected) this.hunt(view);
     if (this.tween) TWEEN.update();
 
-    this.setBoundaries(view);
+    // this.setBoundaries(view);
     this.mesh.translateZ(this.velocity.x);
   }
 
   private init() {
     if (this.activeTimer > 0) {
-      this.flicker(
-        Math.abs(Math.round(this.activeTimer % 2))
-      );
+      // this.flicker(
+      //   Math.abs(Math.round(this.activeTimer % 2))
+      // );
       this.activeTimer-= 1/8;
       return false;
     } else {
-      this.flicker(1);
+      // this.flicker(1);
       this.interactions = true;
     }
     return true;
@@ -82,8 +85,8 @@ export class Spaceship extends ActiveObject {
       this.isOrienting = true;
       this.rotate = this.orient(view.selected.mesh);
       this.tween = new TWEEN.Tween(this.rotate.start)
-        .to(this.rotate.end, 1500)
-        .easing(TWEEN.Easing.Quadratic.InOut)
+        .to(this.rotate.end, 1000)
+        .easing(TWEEN.Easing.Sinusoidal.InOut)
         .onUpdate(()=>{
           if (this.flee || !view.selected) this.cancelTween();
           if (this.face(20)) view.laser = true;
@@ -112,7 +115,8 @@ export class Spaceship extends ActiveObject {
   private evade(view) {
     if (!this.isOrienting){
       this.isOrienting = true;
-      this.rotate = this.orient(view.selected.mesh);
+      if (view.selected)
+        this.rotate = this.orient(view.selected.mesh);
       if (this.face(5)) {
          view.laser = true;
          this.cancelTween();
@@ -121,7 +125,7 @@ export class Spaceship extends ActiveObject {
       this.rotate.end.x *= -.5;
       this.tween = new TWEEN.Tween(this.rotate.start)
         .to(this.rotate.end, 1500)
-        .easing(TWEEN.Easing.Quadratic.InOut)
+        .easing(TWEEN.Easing.Sinusoidal.InOut)
         .onUpdate(()=>{
           this.setMeshProperty('rotation', this.rotate.start);
           if (!this.flee || this.distanceFrom(this.flee) > 20) {

@@ -6,7 +6,7 @@ export class LaserBeam extends ActiveObject {
   public name: string;
   constructor(private ship) {
     super(1);
-    this.loadMesh([.5,.5,2], null, 'BoxGeometry', 0x00ffff);
+    this.loadMesh([.5,.5,2], null, 'BoxGeometry', 0xffffff);
     this.setMeshProperty('position', ship.mesh.position);
     this.setMeshProperty('rotation', ship.mesh.rotation);
     this.setVelocity({ x: .3 + ship.velocity.x, y: 0, z: 0})

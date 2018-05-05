@@ -11,7 +11,7 @@ export class LaserGun extends Emitter{
   }
 
   private gunTimer = 10;
-  private gunTimeout =  10;
+  private gunTimeout =  20;
   private newLaser() {
     const ship = this.spaceship.mesh;
     let laser = new LaserBeam(this.spaceship);

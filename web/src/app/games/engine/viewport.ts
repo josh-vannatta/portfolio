@@ -62,4 +62,14 @@ export class Viewport {
     this.view.window.set(height, height * this.camera.aspect, this.camera.position.z);
   }
 
+  public handleResize() {
+    this.camera.aspect = this.canvas.clientWidth / this.canvas.clientHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(
+      this.canvas.clientWidth,
+      this.canvas.clientHeight
+    );
+    this.getVisibleArea();
+  }
+
 }

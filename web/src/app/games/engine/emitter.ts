@@ -30,7 +30,7 @@ export class Emitter {
     return {
         x: Math.random() * this.window.y / 2 * this.negPos(),
         y: Math.random() * this.window.x / 2 * this.negPos(),
-        z: Math.random() * this.window.z * .2 * this.negPos()
+        z: Math.random() * this.window.z  * this.negPos()
     };
   }
 

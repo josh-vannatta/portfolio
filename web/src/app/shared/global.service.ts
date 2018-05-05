@@ -25,20 +25,4 @@ export class GlobalService {
     return this.passport;
   }
 
-  /*
-
-  The problem at the moment is that I need content for this section of my site and I need it finished today.
-  I don't know what employers would like / not like and my intuition is that it should be genuine and infornmative.
-  How do I make these descriptions informative and geniune? How do I write something worth reading that is about my experience and ability?
-
-  EXPERIENCE & ABILITY is the focus
-
-  I have experience building / doing ____ with ____.
-  I am interested in ____ using ____.
-  I have used ____ libraries / plugins for ____.
-
-  How can I manipulate my employers to get what I want?
-
-  */
-
 }

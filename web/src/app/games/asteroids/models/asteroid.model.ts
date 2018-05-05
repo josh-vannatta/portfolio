@@ -4,38 +4,54 @@ export class Asteroid extends ActiveObject {
   private radius;
   public name;
   public zMax;
+  public quiet = false;
+  private rotx = Math.random();
+  private roty= Math.random();
   constructor(type) {
     super (type.geometry.boundingSphere.radius);
-    this.loadMesh(type.geometry, null, null, this.modelColor(type.materials[0]));
+    this.addOutline(type.geometry);
+    // this.loadMesh(type.geometry, null, null, this.modelColor(type.materials[0]));
     this.setVelocity({
-        x: (Math.random() * .02 + .005) * this.negPos() * .5,
-        y: (Math.random() * .02 + .005) * this.negPos() * .5,
-        z: (Math.random() * .02 + .005) * this.negPos() * .05,
+        x: 0,
+        y: 0,
+        z: -.2,
       })
-    this.zMax = 10;
+    this.zMax = 25;
     this.name = type.name;
     this.interactions = true;
+    this.outline.material.opacity= 0;
   }
 
   maxSpeed() {
     this.setVelocity({
       x: .01 * this.negPos(),
       y: .01 * this.negPos(),
-      z: .01 * this.negPos(),
+      z: -.2,
     })
   }
 
   animate(view) {
-    this.mesh.rotation.x += this.velocity.x;
-    this.mesh.rotation.y += this.velocity.y;
-    this.mesh.rotation.z += this.velocity.z;
-    this.applyVelocity(.03);
+    this.outline.material.opacity += this.quiet ? -.05 : .01;
+    if (this.outline.material.opacity <= 0)
+      this.active = false;
+
+    this.mesh.rotation.x += this.rotx * .01;
+    this.mesh.rotation.y += this.roty * .01;
+    this.mesh.rotation.z += this.rotx * .01;
+    this.applyVelocity(.07);
+
+    this.bindOutline();
 
     if (view.selected != this)
       this.hoverOutline(view);
-    // else console.log(this.active);
+    // // else console.log(this.active);
 
-    this.setBoundaries(view, this.zMax)
+    let boundaries = this.getBoundaries(view);
+    if (Math.abs(this.mesh.position.x) > boundaries.x ||
+        Math.abs(this.mesh.position.y) > boundaries.y ||
+        Math.abs(this.mesh.position.z) >= this.zMax){
+            this.quiet = true;
+        }
   }
 
   private fleeable = null;
@@ -66,15 +82,9 @@ export class Asteroid extends ActiveObject {
         activeColor = 0xff0000;
         view.selected = this;
       }
-      this.material.outlineParameters = {
-          thickNess: 0.5,
-          color: this.setColor(activeColor)
-       };
+      this.outline.material = this.basicMaterial(activeColor)
     }
-    else this.material.outlineParameters = {
-            thickNess: 0.003,
-            color: this.setColor(0x000000)
-       };
+    else this.outline.material = this.basicMaterial(0xffffff)
   }
 
 }

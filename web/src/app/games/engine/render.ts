@@ -1,5 +1,9 @@
 import * as THREE from 'three';
-require('imports-loader?THREE=three!exports-loader?THREE.OutlineEffect!three\/examples\/js\/effects\/OutlineEffect');
+// require('imports-loader?THREE=three!exports-loader?THREE.OutlineEffect!three\/examples\/js\/effects\/OutlineEffect');
+// require('imports-loader?THREE=three!exports-loader?THREE.CopyShader!three\/examples\/js\/shaders\/CopyShader');
+// require('imports-loader?THREE=three!exports-loader?THREE.EffectComposer!three\/examples\/js\/postprocessing\/EffectComposer');
+// require('imports-loader?THREE=three!exports-loader?THREE.EffectComposer!three\/examples\/js\/postprocessing\/SHader');
+// require('imports-loader?THREE=three!exports-loader?THREE.OutlinePass!three\/examples\/js\/postprocessing\/OutlinePass');
 import { Observable } from 'rxjs/Observable';
 import { Viewport } from './viewport';
 
@@ -16,21 +20,28 @@ export class Render extends Viewport {
     this.renderer = new THREE.WebGLRenderer({ alpha: true });
     this.loader = new THREE.JSONLoader();
     this.importer = new THREE.ObjectLoader();
-    this.effect = new THREE.OutlineEffect( this.renderer);
+    // this.effect = new THREE.OutlineEffect( this.renderer);
     this.clock = new THREE.Clock();
   }
 
   protected load(elements: any[]) {
     elements.forEach(element=>{
       this.scene.add(element.mesh);
-      if (element.mesh.animations)
+      if (element.outline)
+        this.scene.add(element.outline);
+      if (element.mesh.animations) {
         this.playAnimations([element.mesh]);
+        if (element.outline)
+          this.playAnimations([element.outline])
+      }
     })
   }
 
   protected remove(elements: any[]) {
     elements.forEach(element=>{
       this.scene.remove(element.mesh);
+      if (element.outline)
+        this.scene.remove(element.outline);
     })
   }
 
@@ -79,6 +90,7 @@ export class Render extends Viewport {
     canvasEl.style.minHeight = '100%';
     canvasEl.style.minWidth = '100%';
     canvasEl.style.transition = '0s';
+    this.handleResize();
   }
 
   protected addCamera(settings: { position, focus }) {
@@ -143,22 +155,14 @@ export class Render extends Viewport {
   }
 
   protected renderFrame() {
-    this.camera.aspect = this.canvas.clientWidth / this.canvas.clientHeight;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(
-      this.canvas.clientWidth,
-      this.canvas.clientHeight
-    );
-    this.getVisibleArea();
-
     const delta = this.clock.getDelta();
     this.animations.forEach(mixer=>{
       const clip = mixer.getRoot().animations[0];
       mixer.clipAction(clip).play();
       mixer.update(delta);
     })
-    this.effect.render( this.scene, this.camera );
-    // this.renderer.render( this.scene, this.camera )
+    // this.effect.render( this.scene, this.camera );
+    this.renderer.render( this.scene, this.camera )
   }
 
 }

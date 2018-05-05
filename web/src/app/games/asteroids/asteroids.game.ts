@@ -14,8 +14,8 @@ export class AsteroidsGame extends Game {
 
   protected setup() {
     this.addCamera({
-      position: [ 0, 15, -40 ],
-      focus: [ 0, 0, 0 ]
+      position: [ 0, 15, -15 ],
+      focus: [ 0, 2, 0 ]
     });
     this.setupScene();
     this.addLights();

@@ -33,7 +33,7 @@ export class ActiveObject extends Model {
   }
 
   protected setBoundaries(view, zMax = null) {
-    const boundaries = this.calcBoundary(this.mesh.position.z, view);
+    const boundaries = this.getBoundaries(view);
     if (zMax) boundaries.z = zMax;
     if (Math.abs(this.mesh.position.x) > boundaries.y / 2 )
         this.mesh.position.x *= -.95;
@@ -43,9 +43,13 @@ export class ActiveObject extends Model {
       this.mesh.position.z *= -.95;
   }
 
+  protected getBoundaries(view) {
+    return this.calcBoundary(this.mesh.position.z, view);
+  }
+
   protected calcBoundary(depth, view) {
     const height = 2 * Math.tan( view.camera.fov / 2 ) * Math.abs( depth - view.window.z);
-    return { x: Math.ceil(height) * 1.1, y: Math.ceil(height * view.camera.aspect) * 1.1, z: Math.abs(view.window.z) };
+    return { x: Math.ceil(height), y: Math.ceil(height * view.camera.aspect), z: Math.abs(view.window.z) };
   }
 
   protected setVelocity(props) {

@@ -13,7 +13,7 @@ export class StarField extends Emitter {
     const star = new Star();
     const pos = this.randomPosition();
     star.mesh.position.set(
-      pos.x, pos.y, pos.z
+      pos.x, pos.y * 1.8,  Math.random() * 20 - 5
     );
     return [star];
   }

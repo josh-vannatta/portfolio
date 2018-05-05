@@ -8,7 +8,11 @@ export class ExplosionEmitter extends Emitter {
    }
 
    new(mesh, model) {
-     const explosion = new Explosion(mesh, model);
+    this.create(mesh, model, true);
+   }
+
+   private create(mesh, model, outline = false) {
+     const explosion = new Explosion(mesh, model, outline);
      this.explosions.push(explosion);
      this.generate.next([explosion]);
    }

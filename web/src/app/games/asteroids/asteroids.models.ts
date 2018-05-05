@@ -62,7 +62,7 @@ export class AsteroidsModels extends ModelsContainer {
     }
 
     public emitters() {
-      this.asteroids(15);
+      this.asteroids(5);
       this.stars(200);
       this.explosions();
     }
@@ -118,6 +118,7 @@ export class AsteroidsModels extends ModelsContainer {
       this.asteroidField.loadAsteroids(asteroidTypes);
       this.emitToScene(this.asteroidField, null,
         remove=>{
+        if (!remove[0].quiet)
           this.explosionEmitter.new(
             this.assets[remove[0].name + '_ex'], remove[0]
           );

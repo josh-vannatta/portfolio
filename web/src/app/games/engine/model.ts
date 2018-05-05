@@ -5,6 +5,7 @@ export class Model {
   public material;
   public geometry;
   public bounding;
+  public outline;
   protected raycaster;
 
   constructor() {
@@ -24,6 +25,30 @@ export class Model {
     return new THREE.Mesh( geometry, material );
   }
 
+  protected addOutline(geometry) {
+    this.outline = this.newMesh(
+     geometry, new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true })
+    );
+    this.loadMesh(
+      geometry, new THREE.MeshBasicMaterial({ color: 0x000d1a })
+    )
+    this.bindOutline();
+  }
+
+  protected bindOutline() {
+    this.outline.position.set(
+      this.mesh.position.x,
+      this.mesh.position.y - .03,
+      this.mesh.position.z +  .1,
+    );
+    this.outline.rotation.set(
+      this.mesh.rotation.x,
+      this.mesh.rotation.y,
+      this.mesh.rotation.z,
+    );
+    this.outline.scale.set(1.05,1.05,1.05)
+  }
+
   protected modelColor(material) {
     const c = material.color;
     return `rgb(${Math.ceil(c.r * 100)}%, ${Math.ceil(c.g * 100)}%, ${Math.ceil(c.b * 100)}%)`;
@@ -31,6 +56,10 @@ export class Model {
 
   protected setColor(color) {
     return new THREE.Color(color);
+  }
+
+  protected basicMaterial(color) {
+    return new THREE.MeshBasicMaterial({ color: color });
   }
 
   protected toonMaterial(colors = null) {
