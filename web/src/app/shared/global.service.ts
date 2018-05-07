@@ -5,14 +5,14 @@ import { HttpHeaders } from '@angular/common/http';
 export class GlobalService {
   appName: string = 'JVN Portfolio';
   appAuthor: string = 'Joshua Van Natta';
-  // serverUrl: string = 'http://127.0.0.1:8000/'; // local
-  serverUrl: string = '/'; // web
+  serverUrl: string = 'http://127.0.0.1:8000/'; // local
+  // serverUrl: string = '/'; // web
   requestHeaders: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json').set('Accept', 'application/json');
   private passport =  {
         grant_type: "password",
         client_id: 2,
-        // client_secret: "cTNF86dUt77vWbGcWgLqboHHBYZvhTDZ05l34phB", // local
-        client_secret: "LtJRGo9qcJS7KHK2wq1wXz8vkdrA1QtPGbZX4v9f", // web
+        client_secret: "cTNF86dUt77vWbGcWgLqboHHBYZvhTDZ05l34phB", // local
+        // client_secret: "LtJRGo9qcJS7KHK2wq1wXz8vkdrA1QtPGbZX4v9f", // web
         username: null,
         password: null,
         scope: "*"
