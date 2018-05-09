@@ -28,7 +28,7 @@ export class ProjectComponent implements OnInit {
     { element: 'input', type: 'hidden', name: 'type', label: '' },
     { element: 'input', name: 'title', label: 'Title', rules: 'required'},
     { element: 'textarea', name: 'content', label: 'Content', rules: 'required|min:80'},
-    { element: 'upload', name: 'image', label: 'Image (JPG)', rules: 'required'},
+    { element: 'upload', name: 'image', label: 'Image (JPG)'},
     { element: 'upload', name: 'code', label: 'Code file (TXT)'},
     { element: 'button', buttons: [
       { type: 'submit', class: 'gradient-focus', label: 'Submit' }

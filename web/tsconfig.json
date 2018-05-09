@@ -23,11 +23,14 @@
       "@directives/*": ["./app/directives/*"],
       "@core/*": ["./app/core/*"],
       "@pipes/*": ["./app/pipes/*"],
-      "@games/*": ["./app/games/*"]
+      "@games/*": ["./app/games_v2/*"]
     }
   },
   "include": [
     "node_modules/angular-bootstrap-md/**/*.ts",
      "src/**/*.ts"
+   ],
+   "exclude": [
+     "src/app/games/**/*.ts"
    ],
 }
