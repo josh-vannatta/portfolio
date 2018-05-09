@@ -1,6 +1,7 @@
-<div class="node-image mb-4">
+<div class="node-image mb-4" *ngIf="imageView || node.code !== 0">
   <div class="image" [ngStyle]="{ 'height': imgDisplay }">
-      <img  [src]="imagePath + 'projects/nodes/image/' + node.id + '.jpg'" alt="{{ node.type }} image" #image>
+      <img  [src]="imagePath + 'projects/nodes/image/' + node.id + '.jpg'" alt="{{ node.type }} image" #image *ngIf="imageView"
+      (error)="imageView = false">
   </div>
   <ng-container *ngIf="node.code !== 0">
     <button type="button" class="btn toggle-code m-0" (click)="toggleCode(codeSection, image)">

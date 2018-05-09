@@ -16,6 +16,7 @@ export class ProjectNodeComponent implements OnInit {
   codeStatus: string = '< code-sample />';
   imgDisplay: string = 'unset';
   imagePath: string;
+  imageView: boolean = true;
   @Input('node') node: ProjectNode;
   @ViewChild('image') image: ElementRef;
   parsedCode: any[] = [];
