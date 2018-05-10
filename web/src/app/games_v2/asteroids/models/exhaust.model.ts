@@ -23,7 +23,7 @@ export class Exhaust extends Model {
       this.mesh.scale.z * 1.01,
     )
     this.velocity = this.vFix;
-    this.material.opacity += this.grow ? .01 : -.05;
+    this.material.opacity += this.grow ? .02 : -.02;
     if (this.grow && this.material.opacity >= .2) this.grow = false;
     if (this.material.opacity <= 0) this.active = false;
   }

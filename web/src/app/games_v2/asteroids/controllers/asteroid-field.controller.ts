@@ -15,7 +15,7 @@ export class AsteroidField extends Controller {
     this.view = view;
     this.window = view.window;
     if (this.timer <= 0 ) {
-      this.timer = Math.floor(Math.random() * 100 + 180 * 1 / this.density);
+      this.timer = Math.floor((Math.random() * 100 + 180 / this.density) * 1 / this.density);
       let newAsteroid = this.newAsteroid();
       this.asteroids.push(newAsteroid);
       this.add([newAsteroid]);
@@ -40,17 +40,13 @@ export class AsteroidField extends Controller {
     this.asteroids.forEach((asteroid, index)=>{
       this.move(asteroid, index);
       if (!asteroid.active) {
-        this.view.selected = null;
         garbage.push(asteroid);
         this.asteroids.splice(index, 1);
         let size = 'medium';
         if (asteroid.size < 1) size = 'small';
         if (asteroid.size < .65) return;
-        // this.explosions.push([asteroid.mesh.position, size]);
         return;
       }
-      // if (this.interactions && asteroid.interactions)
-      //   asteroid.interact(this.interactors, this.view);
     });
     this.fill(this.view);
     this.remove(garbage);
@@ -64,7 +60,8 @@ export class AsteroidField extends Controller {
       if (scale < .3 ) size = 'small';
     }
     let which = Math.floor(Math.random() * this.types[size].length);
-    let asteroid = new Asteroid(this.types[size][which]);
+    let asteroid = new Asteroid(this.types[size][which].model);
+    asteroid.bindExplosion(this.types[size][which].ex)
     asteroid.mesh.position.set(pos.x, pos.y * .5, 25);
     return asteroid;
   }
@@ -78,12 +75,7 @@ export class AsteroidField extends Controller {
     asteroid.mesh.rotation.y += asteroid.roty * .01;
     asteroid.mesh.rotation.z += asteroid.rotx * -.01;
     asteroid.applyVelocity(this.maxSpeed);
-
     asteroid.bindOutline();
-
-    // if (view.selected != asteroid)
-    //   asteroid.hoverOutline(view);
-    // // else console.log(asteroid.active);
 
     let boundaries = asteroid.getBoundaries(this.view);
     if (Math.abs(asteroid.mesh.position.x) > boundaries.x ||

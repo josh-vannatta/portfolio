@@ -21,7 +21,7 @@ export class Booster extends Controller {
     flame.mesh.rotation.set(
       ship.rotation.x, ship.rotation.y, ship.rotation.z,
     );
-    return [flame];
+    return flame;
   }
 
   private puffTimer = 0;
@@ -35,7 +35,7 @@ export class Booster extends Controller {
     exhaust.mesh.rotation.set(
       ship.rotation.x, ship.rotation.y, ship.rotation.z,
     );
-    return [exhaust];
+    return exhaust;
   }
 
   public loop() {
@@ -46,8 +46,8 @@ export class Booster extends Controller {
   private activeExhaust() {
     if (this.puffTimer == 0) {
       let newExhaust = this.newExhaust();
-      this.add(newExhaust);
-      this.plume.push(...newExhaust);
+      this.add([newExhaust]);
+      this.plume.push(newExhaust);
       this.puffTimer = this.puffTimeout;
     }
     this.plume.forEach((exhaust, index)=>{
@@ -63,8 +63,8 @@ export class Booster extends Controller {
   private activeFlames(flames: { max:number , rate:number }) {
     if (this.flameTimer == 0) {
       let newFlame = this.newFlame();
-      this.add(newFlame);
-      this.flames.push(...newFlame);
+      this.add([newFlame]);
+      this.flames.push(newFlame);
       this.flameTimer = this.flameTimeout;
     }
     this.flames.forEach((flame, index)=>{

@@ -3,6 +3,7 @@ import { Model } from './model';
 export class ActiveObject extends Model {
   interactions;
   active;
+  explosion = null;
   private gravity = 0.01;
   private mass;
   protected velocity;
@@ -17,6 +18,14 @@ export class ActiveObject extends Model {
     };
     this.active = true;
     this.interactions = true;
+  }
+
+  public collide(object = null) {}
+  public flee(object = null) {}
+  public fight(object = null) {}
+
+  public bindExplosion(model) {
+    this.explosion = model;
   }
 
   public applyGravity(gravConst) {

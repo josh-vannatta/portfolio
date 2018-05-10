@@ -17,7 +17,7 @@ export class LaserBeam extends ActiveObject {
   }
 
   timeout = 200;
-  animate(view) {
+  loop(view) {
     this.mesh.scale.set(
       this.mesh.scale.x,
       this.mesh.scale.y,
@@ -26,5 +26,9 @@ export class LaserBeam extends ActiveObject {
     this.mesh.translateZ( this.velocity.x );
     if (this.timeout == 0) this.active = false;
     this.timeout--;
+  }
+
+  collide() {
+    this.active = false;
   }
 }

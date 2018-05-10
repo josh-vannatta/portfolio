@@ -4,16 +4,16 @@ export class Explosion extends ActiveObject {
   public mesh;
   private model;
   private children;
-  constructor (mesh, model, private hasOutline) {
+  constructor (model, private hasOutline = true) {
     super(model.size);
-    this.mesh = mesh;
+    this.mesh = model.explosion;
     this.model = model;
     this.setVelocity(this.model.velocity);
     this.setMeshProperty('position', this.model.mesh.position);
     this.setMeshProperty('scale', this.model.mesh.scale);
     if (hasOutline) {
-      this.outline = mesh.clone();
-      this.outline.animations = mesh.animations;
+      this.outline = this.mesh.clone();
+      this.outline.animations = this.mesh.animations;
       this.outline.position.z -= .1;
       this.outline.position.y -= .1;
       this.outline.scale.set(1.05,1.05,1.05)

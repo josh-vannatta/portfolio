@@ -48,4 +48,5 @@ export abstract class Game extends Render {
     if (garbage.length > 0) this.remove(garbage);
   }
 
+
 }

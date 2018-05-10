@@ -9,6 +9,7 @@ import { Pilot } from './controllers/pilot.controller';
 import { StarField } from './controllers/star-field.controller';
 import { AsteroidField } from './controllers/asteroid-field.controller';
 import { Booster } from './controllers/booster.controller';
+import { LaserGun } from './controllers/laser-gun.controller';
 
 export class AsteroidsModels extends ModelsContainer {
     assets = [
@@ -41,32 +42,49 @@ export class AsteroidsModels extends ModelsContainer {
     launchSpaceship() {
       this.spaceship = new Spaceship(this.assets['spaceship']);
       this.spaceship.booster = new Booster();
-      // this.spaceship.laserGun = new LaserGun();
+      this.spaceship.laserGun = new LaserGun();
     }
 
     init(controllers) {
-      let asteroids = [];
-      asteroids['large'] = [
-        this.assets['asteroid_large_1'],
-        this.assets['asteroid_large_2'],
-        this.assets['asteroid_large_3']
-      ];
-      asteroids['medium'] = [
-        this.assets['asteroid_medium_1'],
-        this.assets['asteroid_medium_2'],
-        this.assets['asteroid_medium_3'],
-      ];
-      asteroids['small'] = [
-        this.assets['asteroid_small_1'],
-        this.assets['asteroid_small_2'],
-        this.assets['asteroid_small_3'],
-      ];
+      let asteroids = this.bindAsteroids();
+      this.spaceship.bindExplosion(this.assets['scenes/spaceship_ex'])
       this.bind([
         { master: this.asteroidfield, slave: asteroids },
         { master: this.pilot, slave: this.spaceship },
         { master: this.spaceship.booster, host: this.spaceship },
-        // { master: this.spaceship.laserGun, host: this.spaceship },
+        { master: this.spaceship.laserGun, host: this.spaceship },
       ])
       super.init(controllers);
     }
+
+    private bindAsteroids() {
+      let asteroids = [];
+      asteroids['large'] = [
+        { model: this.assets['asteroid_large_1'],
+          ex: this.assets['scenes/asteroid_large_1_ex'] },
+        { model: this.assets['asteroid_large_2'],
+          ex: this.assets['scenes/asteroid_large_2_ex'] },
+        { model: this.assets['asteroid_large_3'],
+          ex: this.assets['scenes/asteroid_large_3_ex'] },
+      ];
+      asteroids['medium'] = [
+        { model: this.assets['asteroid_medium_1'],
+          ex: this.assets['scenes/asteroid_medium_1_ex'] },
+        { model: this.assets['asteroid_medium_2'],
+          ex: this.assets['scenes/asteroid_medium_2_ex'] },
+        { model: this.assets['asteroid_medium_3'],
+          ex: this.assets['scenes/asteroid_medium_3_ex'] },
+      ];
+      asteroids['small'] = [
+        { model: this.assets['asteroid_small_1'],
+          ex: this.assets['scenes/asteroid_small_1_ex'] },
+        { model: this.assets['asteroid_small_2'],
+          ex: this.assets['scenes/asteroid_small_2_ex'] },
+        { model: this.assets['asteroid_small_3'],
+          ex: this.assets['scenes/asteroid_small_3_ex'] },
+      ];
+      return asteroids;
+    }
+
+
 }
